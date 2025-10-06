@@ -1,9 +1,36 @@
 import type React from 'react';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+
+const GenderOptions = {
+  female: 'female',
+  male: 'male',
+  other: 'other',
+} as const;
+
+type GenderEnum = (typeof GenderOptions)[keyof typeof GenderOptions];
+
+interface IFormInput {
+  firstName: string;
+  gender: GenderEnum;
+}
 
 export const RegisterForm: React.FC = () => {
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
   return (
     <>
-      <div></div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>First Name</label>
+        <input {...register('firstName')} />
+        <label>Gender Selection</label>
+        <select {...register('gender')}>
+          <option value='female'>female</option>
+          <option value='male'>male</option>
+          <option value='other'>other</option>
+        </select>
+        <input type='submit' />
+      </form>
     </>
   );
 };
