@@ -1,18 +1,25 @@
-import './App.css';
+import { useState } from 'react';
+
 import { NativeForms } from './pages/NativeForms';
 import { RegisterForm } from './pages/RegisterForm';
 import { ValidationForm } from './pages/ValidationForm';
 import { Existing } from './pages/Existing';
+import { Users } from './users/components/User';
 
-function App() {
+export function App() {
+  const [show, setShow] = useState<boolean>(false);
+  console.log(setShow);
   return (
     <>
-      <NativeForms />
-      <RegisterForm />
-      <ValidationForm />
-      <Existing />
+      {show && (
+        <>
+          <NativeForms />
+          <RegisterForm />
+          <ValidationForm />
+          <Existing />
+        </>
+      )}
+      <Users />
     </>
   );
 }
-
-export default App;
