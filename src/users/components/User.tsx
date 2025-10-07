@@ -1,19 +1,27 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export const Users: React.FC = () => {
-  const [input, setInput] = useState<string>('');
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<{ email: string }>({ mode: 'all' });
+
+  const onSubmit = () => {
+    console.log('submitted');
+  };
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onBlur={() => {}}
-        name='user-name'
-        disabled
-        required
-        maxLength={12}
+        {...register('email', {
+          required: { value: true, message: 'Email required' },
+          maxLength: { value: 10, message: 'Maximum 10 characters' },
+        })}
+        placeholder='Email'
       />
-    </>
+
+      <p>{errors.email?.message}</p>
+    </form>
   );
 };
