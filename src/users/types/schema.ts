@@ -5,7 +5,7 @@ export const schema = z.object({
   name: z.string().min(1, { message: 'At least 1 character is required' }),
   email: z
     .email()
-    .min(1, { message: 'Invalid email' })
+    .min(1, { message: 'Invalid email length' })
     .refine((email) => patterns.email.test(email), {
       message: 'Invalid email',
     }),
