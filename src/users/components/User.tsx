@@ -1,17 +1,15 @@
-import { TextField, Stack } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { TextField, Stack, Autocomplete } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
 
-import { schema, type SchemaType } from '../types/schema';
+import type { SchemaType } from '../types/schema';
+import { RHFAutocomplete } from '../../components/RHFAutocomplete';
 
 export const Users: React.FC = () => {
   const {
     register,
     formState: { errors },
-  } = useForm<SchemaType>({
-    mode: 'all',
-    resolver: zodResolver(schema),
-  });
+  } = useFormContext<SchemaType>();
+  const options = [{ id: '1', label: 'Mexico' }];
 
   return (
     <Stack sx={{ gap: 2 }}>
@@ -27,6 +25,11 @@ export const Users: React.FC = () => {
         error={!!errors.email}
         helperText={errors.email?.message}
       />
+      <Autocomplete
+        options={options}
+        renderInput={(params) => <TextField {...params} label='States' />}
+      />
+      <RHFAutocomplete<SchemaType> name='states' />
     </Stack>
   );
 };

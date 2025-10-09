@@ -9,6 +9,7 @@ export const schema = z.object({
     .refine((email) => patterns.email.test(email), {
       message: 'Invalid email',
     }),
+  states: z.array(z.string()).min(1).max(2),
 });
 
 // para poder pasar el schema como typado para el intelisense de useForm
