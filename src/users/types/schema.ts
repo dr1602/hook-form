@@ -10,3 +10,7 @@ export const schema = z.object({
       message: 'Invalid email',
     }),
 });
+
+// para poder pasar el schema como typado para el intelisense de useForm
+// pero esto no conecta el useForm con zod
+export type SchemaType = z.infer<typeof schema>;

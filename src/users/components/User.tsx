@@ -1,27 +1,32 @@
+import { TextField, Stack } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { schema, type SchemaType } from '../types/schema';
 
 export const Users: React.FC = () => {
   const {
     register,
     formState: { errors },
-    handleSubmit,
-  } = useForm<{ email: string }>({ mode: 'all' });
-
-  const onSubmit = () => {
-    console.log('submitted');
-  };
+  } = useForm<SchemaType>({
+    mode: 'all',
+    resolver: zodResolver(schema),
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        {...register('email', {
-          required: { value: true, message: 'Email required' },
-          maxLength: { value: 10, message: 'Maximum 10 characters' },
-        })}
-        placeholder='Email'
+    <Stack sx={{ gap: 2 }}>
+      <TextField
+        {...register('name')}
+        label='Name'
+        error={!!errors.name}
+        helperText={errors.name?.message}
       />
-
-      <p>{errors.email?.message}</p>
-    </form>
+      <TextField
+        {...register('email')}
+        label='Email'
+        error={!!errors.email}
+        helperText={errors.email?.message}
+      />
+    </Stack>
   );
 };
