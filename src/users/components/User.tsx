@@ -2,7 +2,7 @@ import { TextField, Stack, Autocomplete } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 
 import type { SchemaType } from '../types/schema';
-import { RHFAutocomplete } from '../../components/RHFAUtocomplete';
+import { RHFAutocomplete } from '../../components/RHFAutocomplete';
 
 export const Users: React.FC = () => {
   const {
