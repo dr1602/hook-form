@@ -1,10 +1,11 @@
-import { Autocomplete, Checkbox, TextField, Box } from '@mui/material';
 import {
   Controller,
   useFormContext,
   type Path,
   type FieldValues,
 } from 'react-hook-form';
+
+import { Autocomplete, Checkbox, TextField, Box } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
@@ -22,22 +23,23 @@ export const RHFAutocomplete = <T extends FieldValues>({
   label,
 }: Props<T>) => {
   const { control } = useFormContext();
+
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { value, onChange, ref }, fieldState: { error } }) => (
         <Autocomplete
-          options={options}
+          options={options || []}
           value={value.map((id: string) =>
-            options.find((item) => item.id === id)
+            options?.find((item) => item.id === id)
           )}
           getOptionLabel={(option) =>
-            options.find((item) => item.id === option.id)?.label ?? ''
+            options?.find((item) => item.id === option.id)?.label ?? ''
           }
           isOptionEqualToValue={(option, newValue) => option.id === newValue.id}
           onChange={(_, newValue) => {
-            onChange(newValue.map((item) => item.d));
+            onChange(newValue.map((item) => item.id));
           }}
           disableCloseOnSelect
           multiple

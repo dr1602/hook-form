@@ -15,3 +15,9 @@ export const schema = z.object({
 // para poder pasar el schema como typado para el intelisense de useForm
 // pero esto no conecta el useForm con zod
 export type SchemaType = z.infer<typeof schema>;
+
+export const defaultValues: SchemaType = {
+  name: '',
+  email: '',
+  states: [],
+};
