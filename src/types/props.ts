@@ -7,3 +7,5 @@ export type Props<T extends FieldValues> = {
   options?: Option[];
   label: string;
 };
+
+export type PropsSinLabel<T extends FieldValues> = Omit<Props<T>, 'label'>;
