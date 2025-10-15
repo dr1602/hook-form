@@ -13,7 +13,7 @@ import type { Option } from '../types/option';
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
-  options: Option[];
+  options?: Option[];
   label: string;
 };
 

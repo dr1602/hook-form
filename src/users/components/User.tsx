@@ -4,8 +4,17 @@ import { useFormContext } from 'react-hook-form';
 
 import type { SchemaType } from '../types/schema';
 import { RHFAutocomplete } from '../../components/RHFAutocomplete';
+import { useStates } from '../services/queries';
+
+const options = [
+  { id: '1', label: 'Mexico' },
+  { id: '2', label: 'Veracruz' },
+  { id: '3', label: 'Oaxaca' },
+];
 
 export const Users: React.FC = () => {
+  const statesQuery = useStates();
+
   // watch nos permite ver el estado actual de nuestro formulario
   // con los params watch('params'), nos permite ver el estado del componente que queramos
   const {
@@ -21,12 +30,6 @@ export const Users: React.FC = () => {
 
     return () => sub.unsubscribe();
   }, [watch]);
-
-  const options = [
-    { id: '1', label: 'Mexico' },
-    { id: '2', label: 'Veracruz' },
-    { id: '3', label: 'Oaxaca' },
-  ];
 
   return (
     <Stack sx={{ gap: 2 }}>
@@ -51,7 +54,7 @@ export const Users: React.FC = () => {
       <RHFAutocomplete<SchemaType>
         name='states'
         label='States'
-        options={options}
+        options={statesQuery.data}
       />
     </Stack>
   );
