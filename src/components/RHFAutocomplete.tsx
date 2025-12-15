@@ -1,21 +1,9 @@
-import {
-  Controller,
-  useFormContext,
-  type Path,
-  type FieldValues,
-} from 'react-hook-form';
-
+import { Controller, useFormContext, type FieldValues } from 'react-hook-form';
 import { Autocomplete, Checkbox, TextField, Box } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-import type { Option } from '../types/option';
-
-type Props<T extends FieldValues> = {
-  name: Path<T>;
-  options?: Option[];
-  label: string;
-};
+import { type Props } from '../types/props';
 
 export const RHFAutocomplete = <T extends FieldValues>({
   name,
