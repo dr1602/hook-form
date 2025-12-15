@@ -4,7 +4,8 @@ import { useFormContext } from 'react-hook-form';
 
 import type { SchemaType } from '../types/schema';
 import { RHFAutocomplete } from '../../components/RHFAutocomplete';
-import { useStates } from '../services/queries';
+import { useLanguages, useStates } from '../services/queries';
+import { RHFToggleButtonGroup } from '../../components/RHFToggleButtonGroup';
 
 const options = [
   { id: '1', label: 'Mexico' },
@@ -14,6 +15,7 @@ const options = [
 
 export const Users: React.FC = () => {
   const statesQuery = useStates();
+  const languagesQuery = useLanguages();
 
   // watch nos permite ver el estado actual de nuestro formulario
   // con los params watch('params'), nos permite ver el estado del componente que queramos
@@ -55,6 +57,10 @@ export const Users: React.FC = () => {
         name='states'
         label='States'
         options={statesQuery.data}
+      />
+      <RHFToggleButtonGroup<SchemaType>
+        name='languagesSpoken'
+        options={languagesQuery.data}
       />
     </Stack>
   );

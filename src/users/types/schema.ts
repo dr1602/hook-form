@@ -10,6 +10,7 @@ export const schema = z.object({
       message: 'Invalid email',
     }),
   states: z.array(z.string()).min(1).max(2),
+  languagesSpoken: z.array(z.string()),
 });
 
 // para poder pasar el schema como typado para el intelisense de useForm
@@ -20,4 +21,5 @@ export const defaultValues: SchemaType = {
   name: '',
   email: '',
   states: [],
+  languagesSpoken: [],
 };
